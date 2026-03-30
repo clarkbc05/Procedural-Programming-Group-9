@@ -28,7 +28,7 @@ int main() {
         printMenu();
         printf("Choice: ");
         scanf("%d", &choice);
-
+/*UI Selection Option Functions*/
         if (choice == 1) {
             printf("Name: ");
             scanf(" %[^\n]", name);
@@ -53,7 +53,7 @@ int main() {
 
         } else if (choice == 5) {
             printf("Exiting. Goodbye!\n");
-
+/* Invalid Input Handling*/
         } else {
             printf("Invalid choice. Try again.\n");
         }
@@ -62,7 +62,7 @@ int main() {
 
     return 0;
 }
-
+/*Create UI*/
 void printMenu() {
     printf("\n-----------------------------\n");
     printf("  1. Open new account\n");
@@ -72,5 +72,3 @@ void printMenu() {
     printf("  5. Exit\n");
     printf("-----------------------------\n");
 }
-
-/* TODO: add function definitions below */
