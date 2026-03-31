@@ -72,3 +72,62 @@ void printMenu() {
     printf("  5. Exit\n");
     printf("-----------------------------\n");
 }
+
+/*Find index of account by ID, returns -1 if not found*/
+int findAccount(int id) {
+    for (int i = 0; i < numAccounts; i++) {
+        if (ids[i] == id)
+            return i;
+    }
+    return -1;
+}
+
+/*Create a new account*/
+void createAccount(char name[], double initialDeposit) {
+    if (numAccounts >= 100) {
+        printf("Error: maximum number of accounts reached.\n");
+        return;
+    }
+    ids[numAccounts] = numAccounts + 1001;
+    strncpy(names[numAccounts], name, 49);
+    names[numAccounts][49] = '\0';
+    balances[numAccounts] = initialDeposit;
+    printf("Account created! ID: %d, Name: %s, Balance: $%.2f\n",
+           ids[numAccounts], names[numAccounts], balances[numAccounts]);
+    numAccounts++;
+}
+
+/*Deposit into an account*/
+void deposit(int id, double amount) {
+    int i = findAccount(id);
+    if (i == -1) {
+        printf("Error: account %d not found.\n", id);
+        return;
+    }
+    balances[i] += amount;
+    printf("Deposited $%.2f. New balance: $%.2f\n", amount, balances[i]);
+}
+
+/*Display a single account*/
+void displayAccount(int id) {
+    int i = findAccount(id);
+    if (i == -1) {
+        printf("Error: account %d not found.\n", id);
+        return;
+    }
+    printf("ID: %d | Name: %s | Balance: $%.2f\n",
+           ids[i], names[i], balances[i]);
+}
+
+/*Display all accounts*/
+void displayAll() {
+    if (numAccounts == 0) {
+        printf("No accounts on file.\n");
+        return;
+    }
+    printf("\n%-8s %-20s %s\n", "ID", "Name", "Balance");
+    printf("-------------------------------------------\n");
+    for (int i = 0; i < numAccounts; i++) {
+        printf("%-8d %-20s $%.2f\n", ids[i], names[i], balances[i]);
+    }
+}
